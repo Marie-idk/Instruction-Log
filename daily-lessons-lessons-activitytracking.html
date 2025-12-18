@@ -55,7 +55,7 @@
             background-color: #ffffff !important;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            padding: 10px 8px;
+            padding: 10px 12px;
             font-weight: 600;
             color: #1e293b;
             transition: all 0.2s;
@@ -94,7 +94,7 @@
         .btn-neon {
             background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
             color: white;
-            box-shadow: 0 4px 12px rgba(255, 0, 85, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 0, 85, 0.3);
             transition: all 0.2s;
             border: 2px solid white;
         }
@@ -163,7 +163,7 @@
         <div class="max-w-2xl mx-auto flex items-center justify-between">
             <h1 class="text-3xl tracking-tighter rainbow-text">GABRIEL'S LOG</h1>
             
-            <!-- Global Date Filter -->
+            <!-- Global Date Filter (For Viewing) -->
             <div class="flex items-center bg-slate-50 rounded-xl border border-slate-200 p-1">
                 <button id="prev-date" class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-white rounded-lg transition"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
                 <div class="px-4 text-center min-w-[120px]">
@@ -195,30 +195,12 @@
             <div id="view-write" class="absolute inset-0 overflow-y-auto scroller p-6 pb-32">
                 <form id="journal-form" class="space-y-6">
                     
-                    <!-- Date Picker -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-black text-slate-400 uppercase ml-1 tracking-wider">Date Completed</label>
-                        <input type="date" id="input-date" class="neon-input cursor-pointer text-lg" required>
-                    </div>
-
-                    <!-- Type Selection -->
-                    <div class="grid grid-cols-3 gap-4">
-                        <label class="cursor-pointer group">
-                            <input type="radio" name="entryType" value="daily" class="peer hidden" checked>
-                            <div class="py-4 text-center text-sm font-bold border-2 border-slate-100 bg-white rounded-2xl text-slate-400 peer-checked:border-[#00f2ea] peer-checked:text-[#00c2bb] peer-checked:bg-cyan-50 transition-all shadow-sm">Daily</div>
-                        </label>
-                        <label class="cursor-pointer group">
-                            <input type="radio" name="entryType" value="weekly" class="peer hidden">
-                            <div class="py-4 text-center text-sm font-bold border-2 border-slate-100 bg-white rounded-2xl text-slate-400 peer-checked:border-[#bd00ff] peer-checked:text-[#a200db] peer-checked:bg-purple-50 transition-all shadow-sm">Weekly</div>
-                        </label>
-                        <label class="cursor-pointer group">
-                            <input type="radio" name="entryType" value="unit" class="peer hidden">
-                            <div class="py-4 text-center text-sm font-bold border-2 border-slate-100 bg-white rounded-2xl text-slate-400 peer-checked:border-[#ff0055] peer-checked:text-[#db0049] peer-checked:bg-pink-50 transition-all shadow-sm">Unit</div>
-                        </label>
-                    </div>
-
-                    <!-- Subject & Category -->
+                    <!-- Date & Subject Row (Header) -->
                     <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-xs font-black text-indigo-500 uppercase ml-1 tracking-wider">DATE TAUGHT</label>
+                            <input type="date" id="input-date" class="neon-input cursor-pointer text-lg border-indigo-200" required>
+                        </div>
                         <div class="space-y-2">
                             <label class="text-xs font-black text-slate-400 uppercase ml-1 tracking-wider">Subject</label>
                             <div class="relative">
@@ -239,9 +221,29 @@
                                 <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none"></i>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Type Selection -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="entryType" value="daily" class="peer hidden" checked>
+                            <div class="py-3 text-center text-sm font-bold border-2 border-slate-100 bg-white rounded-2xl text-slate-400 peer-checked:border-[#00f2ea] peer-checked:text-[#00c2bb] peer-checked:bg-cyan-50 transition-all shadow-sm">Daily</div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="entryType" value="weekly" class="peer hidden">
+                            <div class="py-3 text-center text-sm font-bold border-2 border-slate-100 bg-white rounded-2xl text-slate-400 peer-checked:border-[#bd00ff] peer-checked:text-[#a200db] peer-checked:bg-purple-50 transition-all shadow-sm">Weekly</div>
+                        </label>
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="entryType" value="unit" class="peer hidden">
+                            <div class="py-3 text-center text-sm font-bold border-2 border-slate-100 bg-white rounded-2xl text-slate-400 peer-checked:border-[#ff0055] peer-checked:text-[#db0049] peer-checked:bg-pink-50 transition-all shadow-sm">Unit</div>
+                        </label>
+                    </div>
+
+                    <!-- Category & Unit -->
+                    <div class="grid grid-cols-2 gap-4">
                         <div class="space-y-2">
                             <label class="text-xs font-black text-slate-400 uppercase ml-1 tracking-wider">Work Type</label>
-                            <input id="input-category" list="category-list" class="neon-input text-lg" value="Lesson">
+                            <input id="input-category" list="category-list" class="neon-input" value="Lesson">
                             <datalist id="category-list">
                                 <option value="Worksheet"></option>
                                 <option value="Lesson"></option>
@@ -251,19 +253,16 @@
                                 <option value="Video"></option>
                             </datalist>
                         </div>
-                    </div>
-
-                    <!-- UNIT & TOPIC LINES -->
-                    <div class="space-y-4 pt-2 border-t border-slate-100">
                         <div class="space-y-2">
                             <label class="text-xs font-black text-slate-400 uppercase ml-1 tracking-wider">Unit / Module Name</label>
-                            <input type="text" id="input-unit" class="neon-input text-lg" placeholder="e.g. Solar System">
+                            <input type="text" id="input-unit" class="neon-input" placeholder="e.g. Solar System">
                         </div>
-                        
-                        <div class="space-y-2">
-                            <label class="text-xs font-black text-slate-400 uppercase ml-1 tracking-wider">Topic / Lesson Name</label>
-                            <input type="text" id="input-topic" class="neon-input text-lg font-bold text-indigo-600" placeholder="e.g. The Sun's Gravity">
-                        </div>
+                    </div>
+
+                    <!-- TOPIC LINE -->
+                    <div class="space-y-2 pt-2 border-t border-slate-100">
+                        <label class="text-xs font-black text-indigo-500 uppercase ml-1 tracking-wider">Topic / Lesson Name</label>
+                        <input type="text" id="input-topic" class="neon-input text-lg font-bold text-indigo-700 bg-indigo-50" placeholder="e.g. The Sun's Gravity">
                     </div>
 
                     <div class="space-y-2">
@@ -449,12 +448,14 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('date-display-text').innerText = (iso === today) ? 'Today' : d.toLocaleDateString('en-US', {month:'short', day:'numeric'});
             
+            // Only update form date if NOT in edit mode
             if(!state.editingId) {
                 document.getElementById('input-date').value = iso;
             }
             updateUI();
         }
         
+        // Init
         document.getElementById('input-date').value = state.viewDate;
         setViewDate(state.viewDate);
 
@@ -477,14 +478,17 @@
             const originalHTML = btn.innerHTML;
             btn.innerText = "SAVING...";
 
+            // Capture the date explicitly from the form input
+            const formDate = document.getElementById('input-date').value;
+
             const entry = {
-                date: document.getElementById('input-date').value, 
+                date: formDate, 
                 type: document.querySelector('input[name="entryType"]:checked').value,
                 subject: document.getElementById('input-subject').value,
                 category: document.getElementById('input-category').value,
                 unit: document.getElementById('input-unit').value,
                 topic: document.getElementById('input-topic').value,
-                details: document.getElementById('input-details').value, // NEW FIELD
+                details: document.getElementById('input-details').value, 
                 assignments: document.getElementById('input-assignments').value,
                 notes: document.getElementById('input-notes').value,
                 updatedAt: serverTimestamp()
@@ -499,6 +503,9 @@
                     entry.createdAt = serverTimestamp();
                     await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'daily_journal'), entry);
                 }
+
+                // *** CRITICAL FIX: JUMP VIEW TO THE SAVED DATE ***
+                setViewDate(formDate);
 
                 // Reset specific fields, leave context
                 document.getElementById('input-topic').value = '';
@@ -536,7 +543,7 @@
             document.getElementById('input-category').value = item.category;
             document.getElementById('input-unit').value = item.unit;
             document.getElementById('input-topic').value = item.topic;
-            document.getElementById('input-details').value = item.details || ''; // NEW FIELD
+            document.getElementById('input-details').value = item.details || ''; 
             document.getElementById('input-assignments').value = item.assignments;
             document.getElementById('input-notes').value = item.notes;
 
@@ -609,7 +616,6 @@
 
             container.innerHTML = data.map(item => {
                 let headerHTML = '';
-                // Render Unit Header if in Unit Mode and unit changes
                 if(state.viewMode === 'unit') {
                     const currentUnit = item.unit || "Uncategorized";
                     if(currentUnit !== lastUnit) {
@@ -630,6 +636,8 @@
                 else if(s.includes("Reading")) { bgIcon = "bg-purple-50"; textIcon="text-[#a200db]"; icon="book-open"; }
                 else if(s.includes("Tech")) { bgIcon = "bg-blue-50"; textIcon="text-blue-600"; icon="cpu"; }
 
+                const dateDisplay = `<span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md whitespace-nowrap">${item.date}</span>`;
+
                 return `
                     ${headerHTML}
                     <div class="timeline-card cursor-pointer group mb-4" id="card-${item.id}" onclick="toggleDetails('${item.id}')">
@@ -641,7 +649,7 @@
                                 <div class="overflow-hidden">
                                     <div class="flex items-center gap-2 mb-1">
                                         <span class="text-[10px] font-black uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md tracking-wider whitespace-nowrap">${item.subject}</span>
-                                        ${item.date !== state.viewDate && state.viewMode !== 'daily' && state.viewMode !== 'subject' ? `<span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md whitespace-nowrap">${item.date}</span>` : ''}
+                                        ${dateDisplay}
                                     </div>
                                     
                                     <div class="flex flex-col">
